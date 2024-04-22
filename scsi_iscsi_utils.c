@@ -328,9 +328,14 @@ int get_iscsi_disk_hctl(struct iscsi_dev_info *iscsi_dev)
 	if (!dir)
 		return -ENODEV;
 
-	print_iscsi_header("HOST", iscsi_dev->host_name);
+	print_iscsi_header("LUN", iscsi_dev->host_name);
 
 	for (dent = readdir(dir); dent; dent = readdir(dir)) {
+		char iscsi_disk_path[1024];
+		char iscsi_disk_type[32];
+		char *end;
+		int disk_type;
+
 		print_debug("%s: %s", iscsi_dev->session_disk_path,
 			  dent->d_name);
 
@@ -348,30 +353,49 @@ int get_iscsi_disk_hctl(struct iscsi_dev_info *iscsi_dev)
 		print_debug("%s: %s count %d", iscsi_dev->session_disk_path,
 			dent->d_name, count);
 
-		iscsi_dev->session->lun_count++;
+		snprintf(iscsi_disk_path, sizeof(iscsi_disk_path), "%s/%s/%s",
+		    iscsi_dev->session_disk_path, dent->d_name, "type");
+		snprintf(iscsi_disk_type, sizeof(iscsi_disk_type),
+		    open_sysfs_stats_file(iscsi_disk_path));
+		disk_type = strtoull(iscsi_disk_type, &end, 0);
 
-		print_debug("Scsi%d Channel %d ID %d Lun: %d ",
-			iscsi_dev->session->scsi_channel,
-			iscsi_dev->session->scsi_bus,
-			iscsi_dev->session->scsi_id,
-			iscsi_dev->session->scsi_lun);
+		print_debug("%s: %s = %s ( %s )\n", __func__, iscsi_disk_path,
+		    iscsi_disk_type, dev_type_to_dev_name(disk_type));
 
-		if (count == 4) {
-			/* Get Disk Name */
-			snprintf(disk_path, sizeof(disk_path), "/sys/class/scsi_disk/%s/device/block",
-				dent->d_name);
-			snprintf(disk_name, sizeof(disk_name), get_device_entry(disk_path));
-			print_debug(" disk Path %s, disk name %s\n", disk_path, disk_name);
+		if (disk_type != STORAGE_ARRAY_CNTROLLER) {
+			iscsi_dev->session->lun_count++;
 
-			/* Get Disk State */
-			memset(disk_path, 0, sizeof(disk_path));
-			snprintf(disk_path, sizeof(disk_path), "/sys/class/scsi_disk/%s/device/state",
-				dent->d_name);
-			snprintf(disk_state, sizeof(disk_state), open_sysfs_stats_file(disk_path));
-			print_debug(" Disk Name: %s, Disk State: %s \n", disk_name, disk_state);
+			print_debug("Scsi%d Channel %d ID %d Lun: %d ",
+			    iscsi_dev->session->scsi_channel,
+			    iscsi_dev->session->scsi_bus,
+			    iscsi_dev->session->scsi_id,
+			    iscsi_dev->session->scsi_lun);
 
-			print_iscsi_scsi_disk(iscsi_dev);
-			printf(" \tAttached Scsi Disk: %s\tState: %s \n", disk_name, disk_state);
+			if (count == 4) {
+				/* Get Disk Name */
+				snprintf(disk_path, sizeof(disk_path),
+				    "/sys/class/scsi_disk/%s/device/block",
+				    dent->d_name);
+				snprintf(disk_name, sizeof(disk_name),
+				    get_device_entry(disk_path));
+				print_debug(" disk Path %s, disk name %s\n",
+				    disk_path, disk_name);
+
+				/* Get Disk State */
+				memset(disk_path, 0, sizeof(disk_path));
+				snprintf(disk_path, sizeof(disk_path),
+				    "/sys/class/scsi_disk/%s/device/state",
+				    dent->d_name);
+				snprintf(disk_state, sizeof(disk_state),
+				    open_sysfs_stats_file(disk_path));
+				print_debug(" Disk Name: %s, Disk State: %s \n",
+				    disk_name, disk_state);
+
+				print_iscsi_scsi_disk(iscsi_dev);
+				printf(" \tAttached Scsi Disk: %s\tState: %s \n",
+				    disk_name, disk_state);
+				printf("\n");
+			}
 		}
 	}
 	closedir(dir);
@@ -451,6 +475,14 @@ int get_iscsi_session_info(struct iscsi_dev_info *iscsi_dev)
 	sess->target_id = strtoull(open_sysfs_stats_file(session_str), &end, 0);
 
 	/* /sys/class/iscsi_session/session1/state */
+	memset(session_str, 0, sizeof(session_str));
+	snprintf(session_str, sizeof(session_str), "%s/%s", session_path,
+	    "state");
+	memset(str, 0, sizeof(str));
+	snprintf(str, sizeof(str), open_sysfs_stats_file(session_str));
+	sess->state = strdup(str);
+
+	/* /sys/class/iscsi_session/session1/target_state */
 	memset(session_str, 0, sizeof(session_str));
 	snprintf(session_str, sizeof(session_str), "%s/%s", session_path,
 	    "target_state");
