@@ -61,6 +61,7 @@ struct iscsi_session {
 	int	target_id;
 	char	*targetname;
 	char	*target_state;
+	char	*state;
 	int	tgt_reset_tmo;
 	int	tpgt;
 	int	scsi_channel;

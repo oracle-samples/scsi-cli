@@ -551,6 +551,8 @@ void print_iscsi_session_info(struct iscsi_session *sess)
 
 	printf(" \n");
 	printf(" Target Name		:\t%-s \n", sess->targetname);
+	printf(" Target State		:\t%-s \n", sess->target_state);
+	printf(" Session State		:\t%-s \n", sess->state);
 	printf(" Abort Timeout		:\t%d \n", sess->abort_tmo);
 	printf(" Creator ID		:\t%-d \n", sess->creator);
 	printf(" Data PDU In Order	:\t%d \n", sess->data_pdu_in_order);
