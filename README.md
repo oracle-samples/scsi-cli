@@ -67,7 +67,7 @@ When the tool is build issuing scsi-cli will show all supported command options
       - One of the
         - SCSI generic device (ex: /dev/sdX)
         - SCSI disk device (ex: /dev/sgX)
-        - NVMe Block device (ex: /dev/nvmeXnY
+        - NVMe Block device (ex: /dev/nvmeXnY)
         - NVMe generic Block device (ex: /dev/ngX)
         - Device Mapper stacking device (ex: /dev/dm-X)
         - RAID Array device (ex: /dev/mdXYZ)
@@ -167,7 +167,7 @@ Note:	Currently this tool only supports Disk device, Fibre Channel Devices,
 
 ## Help
 
-If you are having trouble using scsi-cli tool, please create a Github issue, and we'll try to help as best as we can.
+If you are having trouble using scsi-cli tool, please create a Github [issue](issue), and we'll try to help as best as we can.
 
 ## Contributing
 
@@ -185,3 +185,4 @@ Released under the Universal Permissive License v1.0 as shown at
 <https://oss.oracle.com/licenses/upl/>.
 
 [doc]: https://github.com/oracle-samples/scsi-cli/blob/main/Documentation/development.rst
+[issue]: https://github.com/oracle-samples/scsi-cli/issues

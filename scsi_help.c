@@ -83,7 +83,7 @@ void usage(void)
 	printf("%-.6s- One of the\n", space);
 	printf("%-.8s- SCSI generic device (ex: /dev/sdX)\n", space);
 	printf("%-.8s- SCSI disk device (ex: /dev/sgX)\n", space);
-	printf("%-.8s- NVMe Block device (ex: /dev/nvmeXnY\n", space);
+	printf("%-.8s- NVMe Block device (ex: /dev/nvmeXnY)\n", space);
 	printf("%-.8s- NVMe generic Block device (ex: /dev/ngX)\n", space);
 	printf("%-.8s- Device Mapper stacking device (ex: /dev/dm-X)\n", space);
 	printf("%-.8s- RAID Array device (ex: /dev/mdXYZ)\n", space);
