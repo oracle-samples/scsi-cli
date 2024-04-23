@@ -1,0 +1,55 @@
+		SCSI-CLI Command Line Utility
+		-----------------------------
+
+Here's list of TO-Do items that can be improved in the future release
+
+1. Improve Device Path checking
+	i.e. before trying to open the device path check if there are any
+	entries present. This would speed up execution of the scsi-cli
+	output in case no devices are found
+	For Example,
+	1. FCP Devices: Check /sys/class/fc_host/ Directory path
+	   if /sys/class/fc_host/ has 0 entries that means that there are no FC
+	   host configured. meaning, system might have adapter installed but
+	   driver module is not loaded and configured.
+	2. Enclosure: If /sys/class/enclosure/ path does not exists means
+	   there are no enclosure devices present in the system
+	3. iSCSI: check /sys/class/iscsi_host has any entries. if there are 0
+	   entries indicate system does not have iscsi configured
+	4. Md/DM device: check /sys/class/
+	5. SAS devices: Check /sys/class/sas_host/ directory. If there are 0
+	   entries indicate there are no SAS controller or device present.
+
+2. Add support for SAS/Tape/CD-Rom Device.
+
+3. Fully support following comands before next beta release
+	1. Alias capability for renaming devices to custom names.
+	2. Display Error counts for disk/FCP/iSCSI  devices
+	3. Take device Online and Offline
+	4. Issue Reset to a give device
+	5. Issue Full scan of the transport
+
+4. For disk Offline option, Check to make sure we are not disabling boot device.
+   Disabling boot device can result into unpredictable and unreachable system.
+
+5. Add more checks for various device path for tool's stablility.
+
+6. Find a way to get HCTL values without using sscanf().
+	Currently SCSI devices creates sysfs diretory structure
+
+	# ls /sys/block/sda/device/scsi_device/
+	9:0:0:0
+
+	Here the format represents "host:bus:target:lun". In order to read this
+	values in one shot, sscanf() is used. However, sscanf() is considered
+	unsecure coding standard. This code needs to be investigated for a
+	better solution to prevent usage of sscanf().
+
+7. Add user-friendly bash-completion logic. This would allow user to list all
+  supported commands with a tab style completion.
+
+8. Look into ways to scale this tool for a very large system.
+   (For example, a large configuration with
+       - list out 1000s of disk attached to the system,
+       - list out 100s of iSCSI connections,
+       - list out 10s-100s of FC adapters each with 100s of LUNs attached)

@@ -1,0 +1,47 @@
+.\" See file COPYING in distribution for details.
+.\" SPDX-License-Identifier: UPL-1.0
+.\"
+.\" Copyright (c) 2024, Oracle and/or its affiliates.
+.\" Licensed under the Universal Permissive License v 1.0 as shown
+.\" at https://oss.oracle.com/licenses/upl/
+.\"
+.TH SCSI\-CLI "" v0.1 "Date: 11/17/2023" "SCSI\-CLI" "scsi\-cli user manual"
+.SH NAME
+scsi\-cli \- Command line tool for managing and displaying
+SCSI devices on a system.
+
+.SH SYNOPSIS
+
+.BI scsi\-cli " [cmds] "
+
+.SH DESCRIPTION
+The utility scsi\-cli displays information related to various SCSI devices
+presents it in a human-readable format. This utility will issue commands such as
+.BI list
+or
+.BI show
+to list out various devices installed on the system and display them together
+such as
+.BI block
+devices will be displayed together and all the
+.BI FCP
+(Fiber Channel) host for each adatper installed in a system as well as
+.BI iSCSI
+host along with Session and Connection information for each hosts.
+
+.SH OPTIONS
+\-h, \-\-help
+.in +4n
+Display help text and exit.
+.P
+\-v, \-\-version
+.in +4n
+Display version information and exit.
+
+.\" .SH AUTHORS
+.\" .TP
+.\" .IP "Himanshu Madhani"
+.SH SEE ALSO
+.BR scsi-cli-list (1),
+.BR scsi-cli-show (1),
+.BR scsi-cli-stats (1)

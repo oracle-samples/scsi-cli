@@ -1,0 +1,37 @@
+.\" See file COPYING in distribution for details.
+.\" SPDX-License-Identifier: UPL-1.0
+.\"
+.\" Copyright (c) 2024, Oracle and/or its affiliates.
+.\" Licensed under the Universal Permissive License v 1.0 as shown
+.\" at https://oss.oracle.com/licenses/upl/
+.\"
+.TH SCSI\-CLI 8 "" v0.1
+.SH NAME
+scsi\-cli\-stats  \- Will display statistics for the devices on the system.
+
+.SH SYNOPSIS
+
+.BI scsi\-cli " stats "
+
+.SH OVERVIEW
+The stats command will scan system and will display all the devices in order.
+
+\- Block devices
+
+\- Fabric Ports connected
+
+\- iSCSI Devices
+
+Following menu for sub\-command wil display options when scsi\-cli
+.I stats
+command is executed
+
+.BI scsi\-cli " [stats] "
+
+Following Options are supported for \'stats\'
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+
+ disk            Show statistics for block device
+ fc_port         Show statistics for Fiber Channel port
+ iscsi           Show statistics for iSCSI Connection and Sessions

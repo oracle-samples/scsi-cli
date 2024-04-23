@@ -1,0 +1,54 @@
+.\" See file COPYING in distribution for details.
+.\" SPDX-License-Identifier: UPL-1.0
+.\"
+.\" Copyright (c) 2024, Oracle and/or its affiliates.
+.\" Licensed under the Universal Permissive License v 1.0 as shown
+.\" at https://oss.oracle.com/licenses/upl/
+.\"
+.TH SCSI\-CLI 8 "" v0.1
+.SH NAME
+scsi\-cli\-list  \- Will display all the devices on the system.
+
+.SH SYNOPSIS
+
+.BI scsi\-cli " list "
+
+.SH OVERVIEW
+The List command will scan system and will display all the devices in order.
+
+\- Block Deices
+
+\- Enclosure Devices
+
+\- FC HBA
+
+\- iSCSI Devices
+
+\- Generic Disks
+
+\- Multipath configured disks
+
+\- Tape Devices
+
+\- Medium Changes Devices
+
+Following menu for sub\-command wil display options when scsi\-cli
+.I list
+command is executed
+
+.BI scsi\-cli " [list] "
+
+Following Options are supported for \'list\'
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+
+ cd\-rom          List CD\-ROM devices from the host
+ tape            List Tape devices from the host
+ medium\-changer  List Medium Changer devices from the host
+ enclosure       List Enclosure devices from the host
+ fc_hba          List Fiber Channel HBA instlled
+ iscsi           List iSCSI Sessions
+ disk            List disks from the host
+ controller      List disk controllers from the host
+ generic         List generic disk from the host
+ multipath       List multipath disk from the host
