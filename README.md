@@ -1,6 +1,6 @@
 # scsi-cli
 
-scsi-cli is a tool for listing and manipulating various SCSI devices on a system.
+scsi-cli is a tool for listing and manipulating various Small Computer System Interface (SCSI) devices on a system.
 It contains basic command to list devices on the system and other commands to
 change sysfs values of a file to perform action supported by those sysfs file properties.
 
