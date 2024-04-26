@@ -53,3 +53,35 @@ Here's list of TO-Do items that can be improved in the future release
        - list out 1000s of disk attached to the system,
        - list out 100s of iSCSI connections,
        - list out 10s-100s of FC adapters each with 100s of LUNs attached)
+
+
+9. For multipath devices we can extract information from
+/sys/block/mdX/ SysFS hook.
+
+# cat /sys/block/md0/size
+4279230464
+
+# cat /sys/block/md0/md/rd1/size
+536738816
+
+# cat /sys/block/md0/md/dev-sdc/size
+536738816
+
+mdstat show following output. Make sure scsi-cli does not
+show different output and atleast match the mdstat
+
+# cat /proc/mdstat
+Personalities : [raid0]
+md0 : active raid0 sdf[3] sde[2] sdd[1] sdc[0]
+      2139615232 blocks super 1.2 512k chunks
+
+unused devices: <none>
+
+---------------------------------------
+
+fdisk shows folliwng output for the disk. match it with the mdX output
+
+Disk /dev/sdc: 512 GiB, 549755813888 bytes, 1073741824 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
