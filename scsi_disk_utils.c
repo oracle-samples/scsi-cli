@@ -42,7 +42,7 @@
 
 struct device_type_name {
 	int scsi_dev_type;
-	const char *dev_name;
+	char *dev_name;
 } dev_type_str[] = {
 	{ DIRECT_ACCESS_BLOCK_DEVICE, 	"disk" },
 	{ SEQ_ACCESS_DEVICE, 		"Seqential" },
@@ -66,7 +66,7 @@ struct device_type_name {
 	{ UNKNOWN_DEVICE,		"Unknown" },		/* 0x1F */
 };
 
-static const char *dev_type_to_dev_name(int dev_type)
+char *dev_type_to_dev_name(int dev_type)
 {
 	size_t i;
 	struct  device_type_name *d;

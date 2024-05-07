@@ -184,5 +184,5 @@ Copyright (c) 2024 Oracle and/or its affiliates.
 Released under the Universal Permissive License v1.0 as shown at
 <https://oss.oracle.com/licenses/upl/>.
 
-[doc]: https://github.com/oracle-samples/scsi-cli/blob/main/Documentation/development.rst
+[doc]: https://github.com/oracle-samples/scsi-cli/Documentation/development.rst
 [issue]: https://github.com/oracle-samples/scsi-cli/issues

@@ -401,6 +401,7 @@ int get_device_numbers(char *, struct scsi_device_info *);
 int get_device_count(char *);
 int get_hctl_info(struct scsi_device_info *);
 char *get_device_entry(char *);
+char *dev_type_to_dev_name(int);
 int get_enclosure_details(struct scsi_device_info *);
 int get_disk_error_count(char **, struct scsi_device_info *);
 int scsi_scan_disk_dev(char **, struct scsi_device_info *);
