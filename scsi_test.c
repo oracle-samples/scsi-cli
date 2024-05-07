@@ -455,9 +455,23 @@ int cmd_reset(int argc, char **argv, struct scsi_device_list *s_dev)
 		if (err < 0)
 			return err;
 
+		if (argc == 3 || argv[3] == NULL) {
+			print_info("Please provide FC port name to '%s' reset command",
+				argv[2]);
+			return err;
+		}
+
+		if (!s_dev)
+			return -EINVAL;
+
 		snprintf(disk_str, strlen(argv[3]), "%s", argv[3]);
 
 		print_trace_enter();
+
+		if (strncmp(disk_str, "host", 4) != 0) {
+			print_info("Please use a valid FC adapter\n");
+			return err;
+		}
 
 		if (strncmp(argv[2], "adapter", 7) == 0) {
 			print_debug("Issue Adapter Reset to %s", argv[3]);
